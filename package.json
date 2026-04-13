@@ -1,6 +1,6 @@
 {
   "name": "@manycontacts/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "ManyContacts CLI - Programmatic access to all ManyContacts operations",
   "author": "ManyContacts <hello@manycontacts.com> (https://manycontacts.com)",
   "homepage": "https://github.com/manycontacts/cli#readme",
