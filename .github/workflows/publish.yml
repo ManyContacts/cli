@@ -20,9 +20,8 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
 
-      - run: npm ci
+      - run: npm install -g npm@latest
 
-      - name: Remove token auth to enable OIDC
-        run: sed -i '/_authToken/d' $NPM_CONFIG_USERCONFIG
+      - run: npm ci
 
       - run: npm publish --provenance --access public
