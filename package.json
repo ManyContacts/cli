@@ -1,0 +1,50 @@
+{
+  "name": "@manycontacts/cli",
+  "version": "1.0.0",
+  "description": "ManyContacts CLI - Programmatic access to all ManyContacts operations",
+  "author": "ManyContacts <hello@manycontacts.com> (https://manycontacts.com)",
+  "homepage": "https://github.com/manycontacts/cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manycontacts/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manycontacts/cli/issues"
+  },
+  "license": "UNLICENSED",
+  "bin": {
+    "mc": "./bin/mc.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "node bin/mc.js"
+  },
+  "keywords": [
+    "manycontacts",
+    "whatsapp",
+    "cli",
+    "crm",
+    "whatsapp-api",
+    "customer-support",
+    "messaging"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.5",
+    "commander": "^12.1.0",
+    "conf": "^10.2.0",
+    "form-data": "^4.0.0",
+    "ora": "^5.4.1"
+  }
+}
