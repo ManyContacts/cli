@@ -22,6 +22,7 @@ jobs:
 
       - run: npm ci
 
+      - name: Remove token auth to enable OIDC
+        run: sed -i '/_authToken/d' $NPM_CONFIG_USERCONFIG
+
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ''
