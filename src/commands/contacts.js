@@ -10,14 +10,32 @@ module.exports = (program) => {
     .description('List contacts')
     .option('--page <n>', 'Page number', '1')
     .option('--limit <n>', 'Results per page', '50')
-    .option('--open <bool>', 'Filter by open status')
-    .option('--assigned-to <userId>', 'Filter by assigned user')
+    .option('--open <bool>', 'Filter by open/closed status (true/false)')
+    .option('--assigned-to <userId>', 'Filter by assigned user ID')
     .option('--search <query>', 'Search by name or phone')
+    .option('--tags <ids>', 'Filter by tag IDs (comma-separated, contacts must have ALL tags)')
+    .option('--team <teamId>', 'Filter by team ID')
+    .option('--stages <ids>', 'Filter by funnel stage IDs (comma-separated)')
+    .option('--date-from <date>', 'Filter updated after date (YYYY-MM-DD)')
+    .option('--date-to <date>', 'Filter updated before date (YYYY-MM-DD)')
+    .option('--sort <mode>', 'Sort: recent (default), az, oldest, newest')
+    .option('--unread', 'Only contacts with unread messages')
+    .option('--blacklist', 'Only blacklisted contacts')
+    .option('--scheduled', 'Only contacts with pending scheduled messages')
     .action(withErrorHandling(async (opts) => {
       const params = { page: opts.page, limit: opts.limit }
       if (opts.open) params.open = opts.open
       if (opts.assignedTo) params.assigned_to = opts.assignedTo
       if (opts.search) params.search = opts.search
+      if (opts.tags) params.tags = opts.tags
+      if (opts.team) params.team = opts.team
+      if (opts.stages) params.stages = opts.stages
+      if (opts.dateFrom) params.date_from = opts.dateFrom
+      if (opts.dateTo) params.date_to = opts.dateTo
+      if (opts.sort) params.sort = opts.sort
+      if (opts.unread) params.unread = 'true'
+      if (opts.blacklist) params.blacklist = 'true'
+      if (opts.scheduled) params.scheduled = 'true'
       const result = await getClient().get('/contacts', { params })
       printJson(result)
     }))

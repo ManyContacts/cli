@@ -25,7 +25,7 @@ mc auth login --email user@example.com --password mypassword
 ### Register a new account
 
 ```bash
-mc auth register --email user@example.com --name "My Company" --phone +34600000000
+mc auth register --email user@example.com --name "My Company"
 ```
 
 ### Environment variables
@@ -38,7 +38,7 @@ mc auth register --email user@example.com --name "My Company" --phone +346000000
 All responses are JSON by default (ideal for AI agent consumption):
 
 ```json
-{ "ok": true, "data": {...}, "pagination": { "page": 1, "limit": 50, "total": 100, "pages": 2 } }
+{ "ok": true, "data": {...}, "pagination": { "page": 1, "limit": 50, "has_more": true } }
 ```
 
 ### Quick account context
@@ -70,6 +70,30 @@ mc contacts bulk --action add_tag --phones "+34600000000" --value <tag-id>
 mc contacts delete +34600000000
 ```
 
+#### Contact list filters
+
+| Filter | Example | Description |
+|---|---|---|
+| `--open` | `--open true` | Filter by open (`true`) or closed (`false`) status |
+| `--assigned-to` | `--assigned-to <user-id>` | Filter by assigned user |
+| `--search` | `--search "John"` | Search by name or phone number |
+| `--tags` | `--tags id1,id2` | Contacts that have **all** specified tags |
+| `--team` | `--team <team-id>` | Contacts assigned to a team |
+| `--stages` | `--stages id1,id2` | Contacts in specific funnel stages |
+| `--date-from` | `--date-from 2026-01-01` | Updated after this date |
+| `--date-to` | `--date-to 2026-04-14` | Updated before this date |
+| `--sort` | `--sort az` | Sort: `recent` (default), `az`, `oldest`, `newest` |
+| `--unread` | `--unread` | Only contacts with unread messages |
+| `--blacklist` | `--blacklist` | Only blacklisted contacts |
+| `--scheduled` | `--scheduled` | Only contacts with pending scheduled messages |
+
+Filters can be combined:
+
+```bash
+mc contacts list --tags <vip-tag-id> --open true --sort az --limit 100
+mc contacts list --team <support-team-id> --unread --date-from 2026-04-01
+```
+
 ### Messaging
 
 ```bash
@@ -85,8 +109,13 @@ mc messages read +34600000000 <message-id>
 ### Templates
 
 ```bash
-mc messages send template +34600000000 --template <template-id>
+mc templates list
+mc templates list --status approved
+mc templates get <template-id>
+mc templates sync
 ```
+
+The `list` command shows all visible templates with their name, code, status, components and media flags. Use `--status` to filter by `approved`, `pending` or `rejected`. The `sync` command fetches the latest templates from the WhatsApp (Meta Cloud API) account.
 
 ### Tags
 
