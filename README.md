@@ -76,13 +76,11 @@ mc contacts delete +34600000000
 |---|---|---|
 | `--open` | `--open true` | Filter by open (`true`) or closed (`false`) status |
 | `--assigned-to` | `--assigned-to <user-id>` | Filter by assigned user |
-| `--search` | `--search "John"` | Search by name or phone number |
 | `--tags` | `--tags id1,id2` | Contacts that have **all** specified tags |
 | `--team` | `--team <team-id>` | Contacts assigned to a team |
 | `--stages` | `--stages id1,id2` | Contacts in specific funnel stages |
-| `--date-from` | `--date-from 2026-01-01` | Updated after this date |
-| `--date-to` | `--date-to 2026-04-14` | Updated before this date |
-| `--sort` | `--sort az` | Sort: `recent` (default), `az`, `oldest`, `newest` |
+| `--date-from` | `--date-from 2026-01-01` | Updated after this date (max 90 days range) |
+| `--date-to` | `--date-to 2026-04-14` | Updated before this date (max 90 days range) |
 | `--unread` | `--unread` | Only contacts with unread messages |
 | `--blacklist` | `--blacklist` | Only blacklisted contacts |
 | `--scheduled` | `--scheduled` | Only contacts with pending scheduled messages |
@@ -90,8 +88,8 @@ mc contacts delete +34600000000
 Filters can be combined:
 
 ```bash
-mc contacts list --tags <vip-tag-id> --open true --sort az --limit 100
-mc contacts list --team <support-team-id> --unread --date-from 2026-04-01
+mc contacts list --tags <vip-tag-id> --open true --limit 100
+mc contacts list --team <support-team-id> --unread --date-from 2026-01-15 --date-to 2026-04-14
 ```
 
 ### Messaging
